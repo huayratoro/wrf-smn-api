@@ -14,10 +14,10 @@ log.info(f"Seteando argumentos..")
 ##--- Seteando argumentos de entrada
 init_year = 2024
 init_month = 6
-init_day = 9
+init_day = 19
 init_hour = 0
 start_lead_time = 0
-end_lead_time = 3
+end_lead_time = 73
 p_salida = "db/"
 ##----------------------------------
 log.info(f"Argumentos seteados..comienza la descarga..")
@@ -41,5 +41,7 @@ if __name__ == "__main__":
     log.info(f"Descarga finalizada.")
     end = datetime.now()
     log.info(f"Time ending: {end}")
-    dec, h = int(math.modf((end-start).seconds / 3600)); min = int(math.trunc(dec * 60)); seg = int(dec*3600)
-    log.info("Tiempo de ejecucion: {} horas, {} minutos, {} segundos".format(h, min, seg))
+    diff = end - start
+    hours, remainder = divmod(diff.seconds, 3600)
+    minutes, seconds = divmod(remainder, 60)
+    log.info(f"Tiempo de ejecucion: {str(hours).zfill(2)}h:{str(minutes).zfill(2)}min:{str(seconds).zfill(2)}seg")
